@@ -847,17 +847,22 @@ services:
     ports:
       - "${OTEL_COLLECTOR_PORT_GRPC}"
       - "${OTEL_COLLECTOR_PORT_HTTP}"
-    logging: *logging
-    environment:
-      - AD_PROMETHEUS_PORT
-      - FRONTEND_PROXY_ADDR
-      - HOST_FILESYSTEM
-      - IMAGE_PROVIDER_HOST
-      - IMAGE_PROVIDER_PORT
-      - OTEL_COLLECTOR_HOST
-      - OTEL_COLLECTOR_PORT_GRPC
-      - OTEL_COLLECTOR_PORT_HTTP
-      - POSTGRES_HOST
-      - POSTGRES_PORT
-      - POSTGRES_MONITORING_PASSWORD
-      - GOMEMLIMIT=160MiB
+     logging: *logging
+     env_file:
+       - .env
+       - .env.override
+     environment:
+       - AD_PROMETHEUS_PORT
+       - FRONTEND_PROXY_ADDR
+       - HOST_FILESYSTEM
+       - IMAGE_PROVIDER_HOST
+       - IMAGE_PROVIDER_PORT
+       - OTEL_COLLECTOR_HOST
+       - OTEL_COLLECTOR_PORT_GRPC
+       - OTEL_COLLECTOR_PORT_HTTP
+       - POSTGRES_HOST
+       - POSTGRES_PORT
+       - POSTGRES_MONITORING_PASSWORD
+       - GOMEMLIMIT=160MiB
+       - DASH0_OTLP_ENDPOINT
+       - DASH0_AUTH_TOKEN
